@@ -30,6 +30,14 @@ function draw() {
   noStroke();
   ellipse(320,850,1000,1000);
 
+  textSize(72);
+  fill(255, 255, 255, 51);
+  text("what happened", 75, 160);
+  fill(0, 102, 153);
+  text("what happened", 75, 220);
+  fill(0, 102, 153, 51);
+  text("what happened", 75, 280);
+
   // Load in Hillary Clinton
   image(hc_1, x, y);
   image(hc_2, x2, y2);
