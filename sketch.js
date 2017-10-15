@@ -3,6 +3,8 @@ var hc_2;
 var hc_3;
 
 var ghost_1;
+var ghost_2;
+var ghost_3;
 
 var x, y;
 var x2;
@@ -11,11 +13,6 @@ var ghosts = []; // array of Ghost objects
 
 function setup() {
   createCanvas(640, 480);
-
-  // Create ghost objects
-  for (var i=0; i<10; i++) {
-    ghosts.push(new Ghost());
-  }
 
   x = width/2;
   x2 = width/2 - 200;
@@ -28,6 +25,16 @@ function setup() {
   hc_1 = loadImage("hc1.png");
   hc_2 = loadImage("hc2.png");
   hc_3 = loadImage("hc3.png");
+
+  ghost_1 = loadImage("ghost1.png");
+  ghost_2 = loadImage("ghost2.png");
+  ghost_3 = loadImage("ghost3.png");
+  all_ghosts = [ghost_1, ghost_2, ghost_3];
+
+  // Create ghost objects
+  for (var i=0; i<10; i++) {
+    ghosts.push(new Ghost(all_ghosts));
+  }
 }
 
 function draw() {
@@ -79,8 +86,8 @@ function draw() {
  }
 
  // Jitter class
-function Ghost() {
-  ghost_1 = loadImage("ghost1.png");
+function Ghost(all_ghosts) {
+  var ghost = all_ghosts[ceil(random(0,2))];
   this.x = random(width);
   this.y = random(height);
   this.speed = 1;
@@ -91,7 +98,7 @@ function Ghost() {
   };
 
   this.display = function() {
-    image(ghost_1, this.x, this.y);
+    image(ghost, this.x, this.y);
   };
 }
 
