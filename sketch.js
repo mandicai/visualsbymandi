@@ -1,15 +1,23 @@
-var hc_1;
-var hc_2;
-var hc_3;
+var hc_1, hc_2, hc_3;
 
-var ghost_1;
-var ghost_2;
-var ghost_3;
+var ghost_1, ghost_2, ghost_3;
 
-var x, y;
-var x2;
+var x, y, x2, y2, x3, y3;
 
 var ghosts = []; // array of Ghost objects
+var quotes = ["You're my nightmare dressed as a nightmare",
+              "I don't know which I would join first: the naked donut run or the military",
+              "Jello and Mormonism are of equal importance in my life",
+              "That's why I've never dated anyone - no one's been up to the task",
+              "Wearing a Taylor Swift shirt is a risky move on this campus",
+              "I'm going to fall out of bed turning on my noise machine. That would be a noble way to go.",
+              "I'm all about democracy if I'm the dictator",
+              "I never want to be part of a household ... I can't be a part of the system.",
+              "I want a cvs tank for spring weekend",
+              "I literally threw up in my sleep",
+              "I don't practice I just perform"];
+
+var tick = 0;
 
 function setup() {
   createCanvas(640, 480);
@@ -35,6 +43,9 @@ function setup() {
   for (var i=0; i<10; i++) {
     ghosts.push(new Ghost(all_ghosts));
   }
+
+  // Pick a random quote to display
+  quote = quotes[ceil(random(0, quotes.length))];
 }
 
 function draw() {
@@ -46,28 +57,26 @@ function draw() {
   noStroke();
   ellipse(320,850,1000,1000);
 
+  // Display ghosts
   for (var i=0; i<ghosts.length; i++) {
     ghosts[i].move();
     ghosts[i].display();
   }
 
-  textSize(62);
-  fill(255, 255, 255, 51);
-  text("ghosts of our past", 75, 160);
-  fill(255, 255, 255, 51);
-  text("ghosts of our past", 75, 220);
-  fill(255, 255, 255, 51);
-  text("ghosts of our past", 75, 280);
+  // Display quotes
+  drawQuote(quote);
+  tick+=1;
+
+  // Change the quote after 10 seconds
+  if (tick == (60 * 1)) {
+    quote = quotes[ceil(random(0, quotes.length-1))];
+    tick = 0;
+  }
 
   // Load in Hillary Clinton
   image(hc_1, x, y);
   image(hc_2, x2, y2);
   image(hc_3, x3, y3);
-
-   // Jiggling randomly on the horizontal axis
-   x = x + random(-1, 1);
-   x2 = x2 + random(-1, 1);
-   x3 = x3 + random(-1, 1);
 
    // Moving up at a constant speed
    y = y - random(1, 3);
@@ -85,9 +94,17 @@ function draw() {
    }
  }
 
- // Jitter class
+// Draw a quote
+ function drawQuote(quote) {
+   textSize(24);
+	 fill(255, 255, 255);
+	 text(quote, 75, 220);
+ }
+
+ // Ghost class
 function Ghost(all_ghosts) {
   var ghost = all_ghosts[ceil(random(0,2))];
+
   this.x = random(width);
   this.y = random(height);
   this.speed = 1;
@@ -101,15 +118,3 @@ function Ghost(all_ghosts) {
     image(ghost, this.x, this.y);
   };
 }
-
-  // fill(255);
-  // noStroke();
-  // ellipse(mouseX, mouseY, 60, 60);
-
-  // if (mouseIsPressed) {
-  //   console.log("Pressed!");
-  //   fill(0);
-  // } else {
-  //   fill(255);
-  // }
-  // ellipse(mouseX, mouseY, 80, 80);
