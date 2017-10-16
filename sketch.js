@@ -1,6 +1,6 @@
-var hc_1, hc_2, hc_3;
+var hillaryOne, hillaryTwo, hillaryThree;
 
-var ghost_1, ghost_2, ghost_3;
+var ghostOne, ghostTwo, ghostThree;
 
 var x, y, x2, y2, x3, y3;
 
@@ -19,6 +19,12 @@ var quotes = ["You're my nightmare dressed as a nightmare",
 
 var tick = 0;
 
+var spookyFont;
+
+function preload() {
+  spookyFont = loadFont('assets/Tippa.ttf');
+}
+
 function setup() {
   createCanvas(640, 480);
 
@@ -30,14 +36,14 @@ function setup() {
   y2 = height + 200;
   y3 = height + 250;
 
-  hc_1 = loadImage("hc1.png");
-  hc_2 = loadImage("hc2.png");
-  hc_3 = loadImage("hc3.png");
+  hillaryOne = loadImage("hc1.png");
+  hillaryTwo = loadImage("hc2.png");
+  hillaryThree = loadImage("hc3.png");
 
-  ghost_1 = loadImage("ghost1.png");
-  ghost_2 = loadImage("ghost2.png");
-  ghost_3 = loadImage("ghost3.png");
-  all_ghosts = [ghost_1, ghost_2, ghost_3];
+  ghostOne = loadImage("ghost1.png");
+  ghostTwo = loadImage("ghost2.png");
+  ghostThree = loadImage("ghost3.png");
+  all_ghosts = [ghostOne, ghostTwo, ghostThree];
 
   // Create ghost objects
   for (var i=0; i<10; i++) {
@@ -45,7 +51,7 @@ function setup() {
   }
 
   // Pick a random quote to display
-  quote = quotes[ceil(random(0, quotes.length))];
+  quote = quotes[ceil(random(0, quotes.length-1))];
 }
 
 function draw() {
@@ -63,20 +69,10 @@ function draw() {
     ghosts[i].display();
   }
 
-  // Display quotes
-  drawQuote(quote);
-  tick+=1;
-
-  // Change the quote after 10 seconds
-  if (tick == (60 * 1)) {
-    quote = quotes[ceil(random(0, quotes.length-1))];
-    tick = 0;
-  }
-
   // Load in Hillary Clinton
-  image(hc_1, x, y);
-  image(hc_2, x2, y2);
-  image(hc_3, x3, y3);
+  image(hillaryOne, x, y);
+  image(hillaryTwo, x2, y2);
+  image(hillaryThree, x3, y3);
 
    // Moving up at a constant speed
    y = y - random(1, 3);
@@ -92,13 +88,25 @@ function draw() {
      x2 = random(0, width/2 + 200);
      x3 = random(0, width/2 + 200);
    }
+
+  // Display quotes
+  drawQuote(quote);
+  tick+=1;
+
+  // Change the quote after 10 seconds
+  if (tick == (60 * 1)) {
+    quote = quotes[ceil(random(0, quotes.length-1))];
+    tick = 0;
+  }
  }
 
 // Draw a quote
  function drawQuote(quote) {
-   textSize(24);
+   textSize(height/20);
+   textFont(spookyFont);
+   textAlign(CENTER, CENTER);
 	 fill(255, 255, 255);
-	 text(quote, 75, 220);
+	 text(quote, width/8, height/4, [500]);
  }
 
  // Ghost class
@@ -106,7 +114,7 @@ function Ghost(all_ghosts) {
   var ghost = all_ghosts[ceil(random(0,2))];
 
   this.x = random(width);
-  this.y = random(height);
+  this.y = random(height/2, height);
   this.speed = 1;
 
   this.move = function() {
