@@ -94,7 +94,7 @@ function draw() {
   tick+=1;
 
   // Change the quote after 10 seconds
-  if (tick == (60 * 1)) {
+  if (tick == (60 * 10)) {
     quote = quotes[ceil(random(0, quotes.length-1))];
     tick = 0;
   }
