@@ -15,7 +15,8 @@ var quotes = ["You're my nightmare dressed as a nightmare",
               "I never want to be part of a household ... I can't be a part of the system.",
               "I want a cvs tank for spring weekend",
               "I literally threw up in my sleep",
-              "I don't practice I just perform"];
+              "I don't practice I just perform",
+              "marry brett, kill john, fuck the exterminator"];
 
 var tick = 0;
 
