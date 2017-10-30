@@ -115,7 +115,7 @@ function Ghost(all_ghosts) {
   var ghost = all_ghosts[ceil(random(0,2))];
 
   this.x = random(width);
-  this.y = random(height/2, height);
+  this.y = random(height/3, height);
   this.speed = 1;
 
   this.move = function() {
